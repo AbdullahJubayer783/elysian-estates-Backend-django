@@ -2,8 +2,11 @@ from pathlib import Path
 import os
 import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
-SECRET_KEY = 'your-secret-key'
+SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = True
 
@@ -57,7 +60,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-DATABASES["default"] = dj_database_url.parse("postgresql://elysian_estates_user:KubfiK6spvqkrud2NNwXdCMHeM2r5YOn@dpg-cujle9ogph6c73bi3le0-a.oregon-postgres.render.com/elysian_estates")
+
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
