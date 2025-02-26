@@ -4,7 +4,7 @@ from .serializers import PropertySerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import FilterSet, CharFilter
-
+from renderers import UserRenderer
 class PropertyFilter(FilterSet):
     facilities = CharFilter(method='filter_facilities')
 
@@ -19,5 +19,6 @@ class PropertyViewSet(viewsets.ModelViewSet):
     queryset = Property.objects.all()
     serializer_class = PropertySerializer
     # permission_classes = [IsAuthenticatedOrReadOnly]
+    renderer_classes = [UserRenderer]
     filter_backends = [DjangoFilterBackend]
     filterset_class = PropertyFilter

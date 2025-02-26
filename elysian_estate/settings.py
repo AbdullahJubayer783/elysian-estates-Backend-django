@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 import environ
 env = environ.Env()
@@ -11,6 +11,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -22,6 +23,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'properties',
     'django_filters',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -32,6 +34,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'elysian_estate.urls'
@@ -95,4 +98,5 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_RENDERER_CLASSES':('rest_framework.renderers.JSONRenderer',)
 }
